@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
+        
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -28,16 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('students', function (Blueprint $table) {
-            // Drop the foreign key constraint
-            $table->dropForeign(['course_id']);
-        });
-
-        Schema::table('students', function (Blueprint $table) {
-            // Drop the foreign key constraint
-            $table->dropForeign(['phone_number']);
-        });
-
         Schema::dropIfExists('student');
     }
 };
