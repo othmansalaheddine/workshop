@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
             $table->string('number');
-            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
         });
     }
@@ -24,6 +25,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        
+        Schema::table('phones', function (Blueprint $table) {
+            $table->dropForeign(['student_id']);
+        });
         Schema::dropIfExists('phone');
     }
 };
