@@ -14,7 +14,7 @@ class Phone extends Model
         'user_id',
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function student() {
+        return $this->belongsTo(student::class);
     }
 }
