@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('phone_number');
+            $table->foreign('phone_number')->references('number')->on('phones');
+            
         });
     }
 
@@ -23,6 +28,16 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('students', function (Blueprint $table) {
+            // Drop the foreign key constraint
+            $table->dropForeign(['course_id']);
+        });
+
+        Schema::table('students', function (Blueprint $table) {
+            // Drop the foreign key constraint
+            $table->dropForeign(['phone_number']);
+        });
+
         Schema::dropIfExists('student');
     }
 };
